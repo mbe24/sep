@@ -1,2 +1,2 @@
-rootProject.name = "tacton-expr"
+rootProject.name = "sep"
 

@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ExpressionCalculatorTest {
+class ExpressionParserTest {
 
-    private ExpressionCalculator calculator =  new ExpressionCalculator();
+    private ExpressionParser calculator =  new ExpressionParser();
 
     @Test
     @DisplayName("Simple addition")
     void shouldCalculateSimpleAddition() {
         String expression = "2 + 3";
-        int result = calculator.calculate(expression);
+        int result = calculator.buildAst(expression).evaluate();
         assertEquals(5, result);
     }
 
@@ -22,7 +22,7 @@ class ExpressionCalculatorTest {
     @DisplayName("Operator precedence (multiplication before addition)")
     void shouldCorrectlyApplyOperatorPrecedence() {
         String expression = "3 * 2 + 1";
-        int result = calculator.calculate(expression);
+        int result = calculator.buildAst(expression).evaluate();
         assertEquals(7, result);
     }
 
@@ -30,7 +30,7 @@ class ExpressionCalculatorTest {
     @DisplayName("Negative number and operator precedence")
     void shouldHandleNegativeNumbersAndPrecedence() {
         String expression = "3 * -2 + 6";
-        int result = calculator.calculate(expression);
+        int result = calculator.buildAst(expression).evaluate();
         assertEquals(0, result);
     }
 
@@ -38,6 +38,6 @@ class ExpressionCalculatorTest {
     @DisplayName("Division by zero")
     void shouldThrowExceptionForDivisionByZero() {
         String expression = "5 / 0";
-        assertThrows(ArithmeticException.class, () -> calculator.calculate(expression));
+        assertThrows(ArithmeticException.class, () -> calculator.buildAst(expression).evaluate());
     }
 }

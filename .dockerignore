@@ -1,0 +1,17 @@
+# .dockerignore
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Gradle
+.gradle/
+build/
+
+# IDE files
+.idea/
+*.iml

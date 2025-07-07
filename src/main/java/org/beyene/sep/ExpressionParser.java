@@ -9,25 +9,26 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.NoSuchElementException;
 
-public class ExpressionCalculator {
+public class ExpressionParser {
+
+    public static Expression from(String expression) {
+        return new ExpressionParser().buildAst(expression);
+    }
 
     /**
-     * Calculates the value of an integer expression given as a space-separated string.
+     * Creates an AST for an integer expression given as a space-separated string.
      *
      * @param expression The string expression, e.g., "3 * -2 + 1".
-     * @return The integer result of the calculation.
+     * @return The AST for the integer expression
      * @throws IllegalArgumentException if the expression is null, empty, or syntactically invalid.
-     * @throws ArithmeticException for division by zero.
      */
-    public int calculate(String expression) {
+    public Expression buildAst(String expression) {
         if (expression == null || expression.isBlank()) {
             throw new IllegalArgumentException("Expression cannot be null or blank.");
         }
 
         String[] tokens = expression.split(" ");
-        Expression astRoot =  buildAst(tokens);
-        //System.out.println(astRoot);
-        return astRoot.evaluate();
+        return buildAst(tokens);
     }
 
     Expression buildAst(String[] tokens) {

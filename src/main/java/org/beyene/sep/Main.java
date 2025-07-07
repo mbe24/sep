@@ -1,19 +1,20 @@
 package org.beyene.sep;
 
+import org.beyene.sep.model.ast.Expression;
+
+import java.util.stream.Stream;
+
 public class Main {
     public static void main(String[] args) {
-        ExpressionCalculator calculator = new ExpressionCalculator();
+        ExpressionParser parser = new ExpressionParser();
 
-        String expr = "2 + 3";
-        int result = calculator.calculate(expr);
-        System.out.printf("%s = %d%n", expr, result);
-
-        expr = "3 * 2 + 1";
-        result = calculator.calculate(expr);
-        System.out.printf("%s = %d%n", expr, result);
-
-        expr = "3 * -2 + 6";
-        result = calculator.calculate(expr);
-        System.out.printf("%s = %d%n", expr, result);
+        Stream.of(
+                "2 + 3",
+                "3 * 2 + 1",
+                "3 * -2 + 6").forEach(stringExpr -> {
+            Expression expression = parser.buildAst(stringExpr);
+            int result = expression.evaluate();
+            System.out.printf("%s = %d%n%s%n%n", stringExpr, result, expression);
+        });
     }
 }
