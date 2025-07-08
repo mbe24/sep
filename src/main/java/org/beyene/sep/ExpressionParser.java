@@ -23,9 +23,11 @@ public class ExpressionParser {
      * @throws IllegalArgumentException if the expression is null, empty, or syntactically invalid.
      */
     public Expression buildAst(String expression) {
-        if (expression == null || expression.isBlank()) {
+        if (expression == null || expression.isBlank())
             throw new IllegalArgumentException("Expression cannot be null or blank.");
-        }
+
+        if (expression.indexOf(' ') == -1)
+            throw new IllegalArgumentException("Expression does not contain any spaces.");
 
         String[] tokens = expression.split(" ");
         return buildAst(tokens);
