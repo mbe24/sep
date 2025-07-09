@@ -12,9 +12,9 @@ public class NumberExpression implements Expression {
     private final int value;
 
     /**
-     * Constructs a new number expression
+     * Constructs a new number expression.
      *
-     * @param value
+     * @param value value of number expression
      */
     public NumberExpression(int value) {
         this.value = value;

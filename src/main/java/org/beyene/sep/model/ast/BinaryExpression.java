@@ -17,7 +17,7 @@ public class BinaryExpression implements Expression {
     private final Expression right;
 
     /**
-     * Constructs a new binary expression
+     * Constructs a new binary expression.
      *
      * @param left The left-hand side expression (first operand)
      * @param operator The operator that is applied
