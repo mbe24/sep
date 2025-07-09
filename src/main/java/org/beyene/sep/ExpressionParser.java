@@ -18,9 +18,10 @@ public class ExpressionParser {
     /**
      * Creates an AST for an integer expression given as a space-separated string.
      *
-     * @param expression The string expression, e.g., "3 * -2 + 1".
+     * @param expression The string expression, e.g., "3 * -2 + 1"
      * @return The AST for the integer expression
-     * @throws IllegalArgumentException if the expression is null, empty, or syntactically invalid.
+     * @throws IllegalArgumentException if the expression is null, empty, or syntactically invalid
+     * @throws IllegalStateException if AST construction reaches a state we can't recover from
      */
     public Expression buildAst(String expression) {
         if (expression == null || expression.isBlank())
@@ -52,7 +53,7 @@ public class ExpressionParser {
 
         // The expression must end with a number
         if (expectNumber)
-            throw new IllegalArgumentException("Incomplete expression: Expression cannot end with an operator.");
+            throw new IllegalArgumentException("Expression cannot end with an operator.");
 
         // Apply any remaining operators on the stack.
         while (!operatorStack.isEmpty())
@@ -96,7 +97,7 @@ public class ExpressionParser {
 
             expressionStack.push(new BinaryExpression(left, op, right));
         } catch (NoSuchElementException e) {
-            throw new IllegalArgumentException("Malformed expression: Missing an operand for an operator.", e);
+            throw new IllegalStateException("Malformed expression: Missing an operand for an operator.", e);
         }
     }
 }
