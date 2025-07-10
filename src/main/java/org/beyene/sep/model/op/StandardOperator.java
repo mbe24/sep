@@ -6,6 +6,9 @@ import java.util.function.Function;
 import java.util.function.IntBinaryOperator;
 import java.util.stream.Collectors;
 
+/**
+ * Enum that encapsulates the four mathematical basic operations.
+ */
 public enum StandardOperator implements Operator {
 
     ADDITION('+', 1, (a, b) -> a + b),

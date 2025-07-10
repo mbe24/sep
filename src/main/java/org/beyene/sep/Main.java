@@ -1,12 +1,13 @@
 package org.beyene.sep;
 
 import org.beyene.sep.model.ast.Expression;
+import org.beyene.sep.model.ast.construction.RecursiveDescentAlgorithm;
 
 import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
-        ExpressionParser parser = new ExpressionParser();
+        ExpressionParser parser = new ExpressionParser(new RecursiveDescentAlgorithm());
 
         Stream.of(
                 "2 + 3",
